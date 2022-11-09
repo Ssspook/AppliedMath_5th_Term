@@ -4,7 +4,7 @@ import numpy as np
 
 class SimplexSolver:
     eps = 1 / 10 ** 8
-
+    max_iter = 10000
     def __init__(self, source=None, point=None, verbose=False):
         self.verbose = verbose
         if source is not None and point is not None:
@@ -70,8 +70,9 @@ class SimplexSolver:
         if self.verbose:
             print("First table:")
             self.print_table()
-
-        while not self.is_end():
+        iteration = 0
+        while not self.is_end(iteration):
+            iteration += 1
             main_col = self.find_main_col()
             main_row = self.find_main_row(main_col)
 
@@ -95,13 +96,13 @@ class SimplexSolver:
 
         return [self.table, result]
 
-    def is_end(self):
+    def is_end(self, iteration):
         flag = True
         for j in range(1, self.m):
             if self.table[self.n - 1][j] < -SimplexSolver.eps:
                 flag = False
                 break
-        return flag
+        return flag or iteration >= SimplexSolver.max_iter
 
     def find_main_col(self):
         main_col = 1

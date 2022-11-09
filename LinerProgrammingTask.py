@@ -42,7 +42,7 @@ class LinearProgrammingTask:
 
     def solve(self):
         if self.start_point is None:
-            simplex = SimplexSolver(source=self.table)
+            simplex = SimplexSolver(source=self.table, verbose=self.verbose)
             result_table, result = simplex.calculate()
         else:
             simplex = SimplexSolver(source=self.table, point=self.start_point)
