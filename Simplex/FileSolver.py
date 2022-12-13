@@ -1,6 +1,6 @@
 import json
 
-from LinerProgrammingTask import LinearProgrammingTask
+from Simplex.LinerProgrammingTask import LinearProgrammingTask
 
 
 class FileSolver:
